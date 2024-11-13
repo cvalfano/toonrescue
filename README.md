@@ -1,4 +1,4 @@
 # ToonRescue
-ToonRescue is an independent fan project designed to help players of Toontown Rewritten track and manage their SOS cards. This website offers features like a personal SOS card tracker, strategy guides, and detailed information about each SOS Toon’s abilities. Built with AI technology to provide a dynamic user experience, ToonRescue is perfect for players looking to optimise their battle strategies and collect all their favourite Toons. Please note, ToonRescue is not affiliated with Disney or Toontown Rewritten.
+ToonRescue is an independent fan project (not affiliated with ToontownHQ, Toontown Rewritten, or Disney) that provides a comprehensive library of all SOS Toon Cards from ToonTown Rewritten. Built using AI, this site brings together the unique abilities and details of each SOS Toon Card in one accessible place.
 
 http://toonrescue.com
