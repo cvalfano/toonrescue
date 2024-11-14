@@ -1,23 +1,60 @@
-import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import { SearchBar } from './components/SearchBar';
 import { FilterBar } from './components/FilterBar';
 import { SOSCard } from './components/SOSCard';
-import { AccessibilityToggles } from './components/AccessibilityToggles';
-import { sosCards, SOSType } from './data/sosCards';
 import { Navigation } from './components/Navigation';
 import { useTheme } from './context/ThemeContext';
 import { useFont } from './context/FontContext';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { ChangelogPage } from './pages/ChangelogPage';
+import { AccessibilityToggles } from './components/AccessibilityToggles';
+import { sosCards, SOSType } from './data/sosCards';
 import { useState } from 'react';
-import { Changelog } from './components/Changelog';
-import { PrivacyPolicy } from './components/PrivacyPolicy';
 
-export default function App() {
+function Footer() {
+  return (
+    <footer className="bg-[#4526CE] text-white py-6 w-full">
+      <div className="max-w-5xl mx-auto px-3 sm:px-4 text-center space-y-4">
+        <p className="text-xs sm:text-sm">
+          Not affiliated with Toontown Rewritten, ToonHQ or Disney
+        </p>
+
+        <p className="text-xs sm:text-sm">
+          <a 
+            href="mailto:feedback@toonrescue.com"
+            className="text-white hover:text-blue-200 transition-colors underline"
+            aria-label="Send feedback email"
+          >
+            Give Feedback
+          </a>
+          <span className="mx-2">•</span>
+          <Link
+            to="/changelog"
+            className="text-white hover:text-blue-200 transition-colors underline"
+          >
+            Changelog
+          </Link>
+          <span className="mx-2">•</span>
+          <Link
+            to="/privacy"
+            className="text-white hover:text-blue-200 transition-colors underline"
+          >
+            Privacy Policy
+          </Link>
+        </p>
+
+        <p className="text-xs sm:text-sm">
+          © {new Date().getFullYear()} ToonRescue. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+function Home() {
   const [selectedType, setSelectedType] = useState<SOSType | 'all'>('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [showChangelog, setShowChangelog] = useState(false);
-  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const { isDarkMode } = useTheme();
-  const { isDyslexicFont } = useFont();
 
   const filteredCards = sosCards.filter(card => {
     const matchesType = selectedType === 'all' ? true : card.type === selectedType;
@@ -31,12 +68,8 @@ export default function App() {
   });
 
   return (
-    <div className={`min-h-screen flex flex-col relative w-full overflow-x-hidden ${
-      isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
-    } ${isDyslexicFont ? 'font-dyslexic' : ''}`}>
-      <Navigation />
-      
-      <header className="bg-[#4526CE] text-white py-4 sm:py-6 px-3 sm:px-4 shadow-lg w-full">
+    <>
+      <div className="fixed top-[56px] sm:top-[84px] left-0 right-0 bg-[#4526CE] text-white py-4 sm:py-6 px-3 sm:px-4 shadow-lg z-40">
         <div className="max-w-5xl mx-auto relative">
           <div className="flex items-center justify-center mb-3 sm:mb-4">
             <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-center">
@@ -50,15 +83,17 @@ export default function App() {
             onSearchChange={setSearchTerm}
           />
         </div>
-      </header>
+      </div>
 
       <main className={`flex-grow max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6 w-full ${
         isDarkMode ? 'text-white' : 'text-gray-900'
-      }`}>
-        <FilterBar 
-          selectedType={selectedType}
-          onTypeChange={setSelectedType}
-        />
+      } mt-[184px] sm:mt-[240px]`}>
+        <div className="mb-4 sm:mb-6">
+          <FilterBar 
+            selectedType={selectedType}
+            onTypeChange={setSelectedType}
+          />
+        </div>
 
         <div className="grid gap-2 sm:gap-4 mb-6">
           {sortedCards.map(card => (
@@ -83,49 +118,27 @@ export default function App() {
           </div>
         )}
       </main>
+    </>
+  );
+}
 
-      <footer className="bg-[#4526CE] text-white py-6 w-full mt-auto">
-        <div className="max-w-5xl mx-auto px-3 sm:px-4 text-center space-y-4">
-          <div className="flex justify-center">
-            <AccessibilityToggles />
-          </div>
-          
-          <p className="text-xs sm:text-sm">
-            Not affiliated with Toontown Rewritten, ToonHQ or Disney
-          </p>
-          
-          <div className="text-xs sm:text-sm">
-            <a 
-              href="mailto:feedback@toonrescue.com"
-              className="text-white hover:text-blue-200 transition-colors underline"
-              aria-label="Send feedback email"
-            >
-              Give Feedback
-            </a>
-            <span className="mx-2">•</span>
-            <button
-              onClick={() => setShowChangelog(true)}
-              className="text-white hover:text-blue-200 transition-colors underline"
-            >
-              Changelog
-            </button>
-            <span className="mx-2">•</span>
-            <button
-              onClick={() => setShowPrivacyPolicy(true)}
-              className="text-white hover:text-blue-200 transition-colors underline"
-            >
-              Privacy Policy
-            </button>
-          </div>
+export default function App() {
+  const { isDarkMode } = useTheme();
+  const { isDyslexicFont } = useFont();
 
-          <p className="text-xs sm:text-sm">
-            © {new Date().getFullYear()} ToonRescue. All rights reserved.
-          </p>
-        </div>
-      </footer>
+  return (
+    <div className={`min-h-screen flex flex-col relative w-full overflow-x-hidden ${
+      isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+    } ${isDyslexicFont ? 'font-dyslexic' : ''}`}>
+      <Navigation />
+      
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/changelog" element={<ChangelogPage />} />
+      </Routes>
 
-      <Changelog isOpen={showChangelog} onClose={() => setShowChangelog(false)} />
-      <PrivacyPolicy isOpen={showPrivacyPolicy} onClose={() => setShowPrivacyPolicy(false)} />
+      <Footer />
     </div>
   );
 }

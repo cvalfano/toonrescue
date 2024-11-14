@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { ThemeProvider } from './context/ThemeContext';
 import { FontProvider } from './context/FontContext';
@@ -10,10 +11,12 @@ if (!rootElement) throw new Error('Root element not found');
 
 createRoot(rootElement).render(
   <StrictMode>
-    <ThemeProvider>
-      <FontProvider>
-        <App />
-      </FontProvider>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <FontProvider>
+          <App />
+        </FontProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   </StrictMode>
 );

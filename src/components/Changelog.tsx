@@ -19,7 +19,7 @@ export function Changelog({ isOpen, onClose }: Props) {
       } p-6 max-h-[90vh] overflow-y-auto`}>
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 p-1 rounded-full hover:bg-gray-200/20 transition-colours"
+          className="absolute right-4 top-4 p-1 rounded-full hover:bg-gray-200/20 transition-colors"
           aria-label="Close changelog"
         >
           <X className={`w-5 h-5 ${isDarkMode ? 'text-white' : 'text-gray-600'}`} />
@@ -30,6 +30,28 @@ export function Changelog({ isOpen, onClose }: Props) {
         </h2>
 
         <div className={`space-y-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <div>
+            <h3 className={`text-lg font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              Version 1.0.1 - UI Improvements
+            </h3>
+            <div className="space-y-4">
+              <div>
+                <h4 className={`font-medium mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                  Changes:
+                </h4>
+                <ul className="list-disc list-inside space-y-2 ml-2">
+                  <li>Changed dark mode to be enabled by default for better visibility</li>
+                  <li>Added image enlargement feature when clicking on Toon images (Thanks to Reddit user No Cut)</li>
+                  <li>Fixed navigation and search container to the top for easier access</li>
+                  <li>Corrected spacing between navigation and search container on mobile devices</li>
+                  <li>Enhanced spacing between filter tags and search container</li>
+                  <li>Optimised spacing between SOS cards and filter tags</li>
+                  <li>Improved accessibility menu toggle behaviour</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
           <div>
             <h3 className={`text-lg font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
               Version 1.0.0 - Initial Release
