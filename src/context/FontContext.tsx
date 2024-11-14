@@ -11,20 +11,17 @@ const FontContext = createContext<FontContextType>({
 });
 
 export function FontProvider({ children }: { children: React.ReactNode }) {
-  const [isDyslexicFont, setIsDyslexicFont] = useState(false);
+  const [isDyslexicFont, setIsDyslexicFont] = useState(() => {
+    const savedFont = localStorage.getItem('font');
+    return savedFont === 'dyslexic';
+  });
 
   useEffect(() => {
-    const savedFont = localStorage.getItem('font');
-    if (savedFont) {
-      setIsDyslexicFont(savedFont === 'dyslexic');
-    }
-  }, []);
+    localStorage.setItem('font', isDyslexicFont ? 'dyslexic' : 'default');
+    document.documentElement.classList.toggle('font-dyslexic', isDyslexicFont);
+  }, [isDyslexicFont]);
 
-  const toggleFont = () => {
-    const newValue = !isDyslexicFont;
-    setIsDyslexicFont(newValue);
-    localStorage.setItem('font', newValue ? 'dyslexic' : 'default');
-  };
+  const toggleFont = () => setIsDyslexicFont(prev => !prev);
 
   return (
     <FontContext.Provider value={{ isDyslexicFont, toggleFont }}>

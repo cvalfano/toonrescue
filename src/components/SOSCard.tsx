@@ -2,6 +2,7 @@ import React from 'react';
 import { Star } from 'lucide-react';
 import { SOSCard as SOSCardType } from '../data/sosCards';
 import { useTheme } from '../context/ThemeContext';
+import { ImageWithFallback } from './ImageWithFallback';
 
 interface Props {
   card: SOSCardType;
@@ -9,6 +10,9 @@ interface Props {
 
 export function SOSCard({ card }: Props) {
   const { isDarkMode } = useTheme();
+
+  // List of toons that need top-aligned images
+  const topAlignedToons = ['Flippy', 'Doctor Drift', 'Flim Flam', 'Professor Guffaw'];
 
   return (
     <div className={`${
@@ -18,10 +22,12 @@ export function SOSCard({ card }: Props) {
     } rounded-lg shadow hover:shadow-md transition-all`}>
       <div className="flex items-start p-3 sm:p-4">
         <div className="relative w-16 h-16 sm:w-24 sm:h-24 flex-shrink-0">
-          <img 
+          <ImageWithFallback 
             src={card.imageUrl} 
             alt={card.name}
-            className="w-full h-full object-cover rounded"
+            className={`w-full h-full object-cover rounded ${
+              topAlignedToons.includes(card.name) ? 'object-top' : ''
+            }`}
           />
         </div>
         
