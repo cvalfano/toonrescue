@@ -14,22 +14,11 @@ export function SOSCard({ card, index }: Props) {
   const { isDarkMode } = useTheme();
   const [showModal, setShowModal] = useState(false);
   const imageRef = useRef<HTMLButtonElement>(null);
-  const nameRef = useRef<HTMLButtonElement>(null);
-  const starsRef = useRef<HTMLButtonElement>(null);
-  const infoRef = useRef<HTMLButtonElement>(null);
-  const cardRef = useRef<HTMLElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       setShowModal(true);
-    }
-  };
-
-  const handleCardKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      imageRef.current?.focus();
     }
   };
 
@@ -41,19 +30,25 @@ export function SOSCard({ card, index }: Props) {
     return `${card.name}: ${starsText} ${typeFormatted} SOS Toon that ${effectText}`;
   };
 
+  const getCardDescription = (card: SOSCardType) => {
+    const typeFormatted = card.type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    const starsText = `${card.stars} star`;
+    const stats = card.statistics.join('. ');
+    
+    return `${card.name}, ${starsText} ${typeFormatted} type. ${card.description}. ${stats}`;
+  };
+
   return (
     <>
       <article 
-        ref={cardRef}
         className={`${
           isDarkMode 
             ? 'bg-gray-800 hover:bg-gray-750' 
             : 'bg-white hover:bg-gray-50'
-        } rounded-lg shadow hover:shadow-md transition-all outline-none`}
+        } rounded-lg shadow hover:shadow-md transition-all`}
         role="listitem"
+        aria-label={getCardDescription(card)}
         tabIndex={0}
-        onKeyDown={handleCardKeyDown}
-        aria-label={`SOS Card for ${card.name}, ${card.stars} stars, ${card.type} type`}
       >
         <div className="flex items-start p-3 sm:p-4">
           <button 
@@ -76,22 +71,11 @@ export function SOSCard({ card, index }: Props) {
             <div className="flex items-start justify-between gap-2">
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <button
-                    ref={nameRef}
-                    className={`text-lg sm:text-xl font-bold leading-tight focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4526CE] dark:focus-visible:ring-white rounded ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}
-                    onClick={() => starsRef.current?.focus()}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        starsRef.current?.focus();
-                      }
-                    }}
-                    tabIndex={0}
-                  >
+                  <h2 className={`text-lg sm:text-xl font-bold leading-tight ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {card.name}
-                  </button>
+                  </h2>
                   <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                     isDarkMode 
                       ? 'bg-blue-900/50 text-blue-100' 
@@ -100,18 +84,9 @@ export function SOSCard({ card, index }: Props) {
                     {card.type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                   </span>
                 </div>
-                <button
-                  ref={starsRef}
-                  className="flex items-center mt-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4526CE] dark:focus-visible:ring-white rounded p-0.5"
+                <div 
+                  className="flex items-center mt-1"
                   aria-label={`${card.stars} star rating`}
-                  onClick={() => infoRef.current?.focus()}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      infoRef.current?.focus();
-                    }
-                  }}
-                  tabIndex={0}
                 >
                   {[...Array(card.stars)].map((_, i) => (
                     <Star 
@@ -120,32 +95,13 @@ export function SOSCard({ card, index }: Props) {
                       aria-hidden="true" 
                     />
                   ))}
-                </button>
+                </div>
               </div>
             </div>
             
-            <button
-              ref={infoRef}
-              className={`mt-1.5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4526CE] dark:focus-visible:ring-white rounded p-1 ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-900'
-              }`}
-              onClick={() => {
-                const nextCard = cardRef.current?.nextElementSibling?.querySelector('button');
-                if (nextCard) {
-                  (nextCard as HTMLElement).focus();
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  const nextCard = cardRef.current?.nextElementSibling?.querySelector('button');
-                  if (nextCard) {
-                    (nextCard as HTMLElement).focus();
-                  }
-                }
-              }}
-              tabIndex={0}
-            >
+            <div className={`mt-1.5 ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-900'
+            }`}>
               <p className="text-sm sm:text-base">
                 {card.description}
               </p>
@@ -161,7 +117,7 @@ export function SOSCard({ card, index }: Props) {
                   </ul>
                 </div>
               )}
-            </button>
+            </div>
           </div>
         </div>
       </article>
