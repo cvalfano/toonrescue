@@ -17,6 +17,9 @@ export default {
         'safe-bottom': 'env(safe-area-inset-bottom)',
         'safe-left': 'env(safe-area-inset-left)',
         'safe-right': 'env(safe-area-inset-right)',
+      },
+      fontFamily: {
+        'dyslexic': ['OpenDyslexic', 'sans-serif'],
       }
     },
   },

@@ -35,7 +35,7 @@ function Footer() {
                 to="/changelog"
                 className="text-white hover:text-blue-200 transition-colors underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded px-2 py-1"
               >
-                Changelog
+                Changelog (v1.0.2)
               </Link>
             </li>
             <li aria-hidden="true">•</li>
