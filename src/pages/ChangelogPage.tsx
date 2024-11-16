@@ -35,6 +35,34 @@ export function ChangelogPage() {
             className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
             tabIndex={0}
           >
+            Version 1.0.3 - Mobile Optimisation
+          </h2>
+          <div className="space-y-4">
+            <div>
+              <h3 
+                className={`text-lg font-medium mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}
+                tabIndex={0}
+              >
+                Changes:
+              </h3>
+              <ul 
+                className="list-disc list-inside space-y-2 ml-2"
+                role="list"
+              >
+                <li tabIndex={0}>Added proper spacing for devices with notches and status bars</li>
+                <li tabIndex={0}>Enhanced PWA support with improved home screen icon</li>
+                <li tabIndex={0}>Optimised navigation layout for mobile devices</li>
+                <li tabIndex={0}>Added black translucent status bar style for iOS devices</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 
+            className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+            tabIndex={0}
+          >
             Version 1.0.2 - Accessibility Enhancements
           </h2>
           <div className="space-y-4">
@@ -54,7 +82,7 @@ export function ChangelogPage() {
                 <li tabIndex={0}>Added comprehensive alt text descriptions for all SOS Toon card images</li>
                 <li tabIndex={0}>Optimised image modal layout for better accessibility</li>
                 <li tabIndex={0}>Added feedback button with direct email link</li>
-                <li tabIndex={0}>Improved focus management for modal dialogs</li>
+                <li tabIndex={0}>Improved focus management for modal dialogues</li>
                 <li tabIndex={0}>Enhanced ARIA labels and roles for better screen reader navigation</li>
                 <li tabIndex={0}>Optimised tab order for a more logical navigation flow</li>
                 <li tabIndex={0}>Added proper heading hierarchy for better document structure</li>
