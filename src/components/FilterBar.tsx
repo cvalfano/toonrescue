@@ -30,7 +30,7 @@ export function FilterBar({ selectedType, onTypeChange }: Props) {
   return (
     <div className="relative w-full">
       <div className="overflow-x-auto no-scrollbar -mx-4 px-4 pb-2 mb-4">
-        <div className="flex gap-2 min-w-max max-w-full">
+        <div className="flex gap-2 min-w-max">
           {types.map((type) => (
             <button
               key={type}
