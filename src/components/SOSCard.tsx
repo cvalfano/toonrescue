@@ -10,6 +10,41 @@ interface Props {
   index: number;
 }
 
+const getTagColors = (type: string, isDarkMode: boolean) => {
+  const colors = {
+    'drop': {
+      bg: isDarkMode ? '#008FAB20' : '#008FAB15',
+      text: isDarkMode ? '#7FD4E5' : '#006B80'
+    },
+    'toon-up': {
+      bg: isDarkMode ? '#8448B320' : '#8448B315',
+      text: isDarkMode ? '#C9A6E5' : '#5F3580'
+    },
+    'trap': {
+      bg: isDarkMode ? '#D4A11420' : '#D4A11415',
+      text: isDarkMode ? '#FFD77A' : '#8F6E0E'
+    },
+    'lure': {
+      bg: isDarkMode ? '#3BA13620' : '#3BA13615',
+      text: isDarkMode ? '#90E58C' : '#2C7828'
+    },
+    'sound': {
+      bg: isDarkMode ? '#4A59DB20' : '#4A59DB15',
+      text: isDarkMode ? '#A7B0F2' : '#364099'
+    },
+    'restock': {
+      bg: isDarkMode ? '#D1149920' : '#D1149915',
+      text: isDarkMode ? '#FF8AD4' : '#960C6D'
+    },
+    'accuracy': {
+      bg: isDarkMode ? '#0D246620' : '#0D246615',
+      text: isDarkMode ? '#7A8BC2' : '#091947'
+    }
+  };
+  
+  return colors[type as keyof typeof colors];
+};
+
 export function SOSCard({ card, index }: Props) {
   const { isDarkMode } = useTheme();
   const [showModal, setShowModal] = useState(false);
@@ -37,6 +72,8 @@ export function SOSCard({ card, index }: Props) {
     
     return `${card.name}, ${starsText} ${typeFormatted} type. ${card.description}. ${stats}`;
   };
+
+  const tagColors = getTagColors(card.type, isDarkMode);
 
   return (
     <>
@@ -76,11 +113,13 @@ export function SOSCard({ card, index }: Props) {
                   }`}>
                     {card.name}
                   </h2>
-                  <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                    isDarkMode 
-                      ? 'bg-blue-900/50 text-blue-100' 
-                      : 'bg-[#2E1A87]/20 text-[#2E1A87]'
-                  } whitespace-nowrap`}>
+                  <span 
+                    className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap"
+                    style={{
+                      backgroundColor: tagColors.bg,
+                      color: tagColors.text
+                    }}
+                  >
                     {card.type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                   </span>
                 </div>
