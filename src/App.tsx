@@ -34,8 +34,9 @@ function Footer() {
               <Link
                 to="/changelog"
                 className="text-white hover:text-blue-200 transition-colors underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded px-2 py-1"
+                onClick={() => window.scrollTo(0, 0)}
               >
-                Changelog (v1.0.4)
+                Changelog (v1.0.5)
               </Link>
             </li>
             <li aria-hidden="true">•</li>
@@ -43,6 +44,7 @@ function Footer() {
               <Link
                 to="/privacy"
                 className="text-white hover:text-blue-200 transition-colors underline focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded px-2 py-1"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 Privacy Policy
               </Link>
@@ -137,7 +139,7 @@ export default function App() {
 
   return (
     <div className={`min-h-screen flex flex-col relative w-full overflow-x-hidden ${
-      isDarkMode ? 'bg-gray-900 dark' : 'bg-gray-100'
+      isDarkMode ? 'bg-gray-900 dark' : 'bg-gray-200'
     } ${isDyslexicFont ? 'font-dyslexic' : ''}`}>
       <a href="#main-content" className="skip-to-main">
         Skip to main content

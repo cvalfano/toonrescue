@@ -35,6 +35,35 @@ export function ChangelogPage() {
             className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
             tabIndex={0}
           >
+            Version 1.0.5 - UI Enhancements
+          </h2>
+          <div className="space-y-4">
+            <div>
+              <h3 
+                className={`text-lg font-medium mb-2 ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}
+                tabIndex={0}
+              >
+                Changes:
+              </h3>
+              <ul 
+                className="list-disc list-inside space-y-2 ml-2"
+                role="list"
+              >
+                <li tabIndex={0}>Added gag icons to filter categories for better visual recognition</li>
+                <li tabIndex={0}>Enhanced filter bar with category-specific colours (Thanks to TTR Toon Xmas)</li>
+                <li tabIndex={0}>Improved background contrast in light mode for better readability</li>
+                <li tabIndex={0}>Fixed navigation scroll behavior for changelog and privacy pages</li>
+                <li tabIndex={0}>Optimized PWA performance and responsiveness</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 
+            className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+            tabIndex={0}
+          >
             Version 1.0.4 - Visual Enhancements
           </h2>
           <div className="space-y-4">
@@ -50,8 +79,7 @@ export function ChangelogPage() {
                 role="list"
               >
                 <li tabIndex={0}>Updated tag colours for better visibility and categorisation</li>
-                <li tabIndex={0}>Enhanced filter bar with category-specific colours (Thanks to TTR Toon Xmas)</li>
-                <li tabIndex={0}>Improved colour contrast for better accessibility in both dark and light modes</li>
+                <li tabIndex={0}>Enhanced colour contrast for better accessibility in both dark and light modes</li>
                 <li tabIndex={0}>Optimised visual hierarchy of category indicators</li>
               </ul>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { SOSType, sosCards } from '../data/sosCards';
 import { useTheme } from '../context/ThemeContext';
+import { ImageWithFallback } from './ImageWithFallback';
 
 interface Props {
   selectedType: SOSType | 'all';
@@ -62,6 +63,21 @@ const getTagColors = (type: string, isDarkMode: boolean) => {
   return colors[type as keyof typeof colors];
 };
 
+const getGagIcon = (type: SOSType | 'all') => {
+  const icons = {
+    'all': '',
+    'drop': 'https://github.com/cvalfano/toonrescue/blob/main/images/gags/drop/Flower_Pot_Icon.png?raw=true',
+    'toon-up': 'https://github.com/cvalfano/toonrescue/blob/main/images/gags/tu/Feather_Icon.png?raw=true',
+    'trap': 'https://github.com/cvalfano/toonrescue/blob/main/images/gags/trap/Banana_Peel_Icon.png?raw=true',
+    'lure': 'https://github.com/cvalfano/toonrescue/blob/main/images/gags/lure/$1_Bill_Icon.png?raw=true',
+    'sound': 'https://github.com/cvalfano/toonrescue/blob/main/images/gags/sound/Bike_Horn_Icon.png?raw=true',
+    'restock': 'https://github.com/cvalfano/toonrescue/blob/main/images/gags/Restock_icon.png?raw=true',
+    'accuracy': 'https://github.com/cvalfano/toonrescue/blob/main/images/gags/Statuseffect_accuracyup_Toon.png?raw=true'
+  };
+  
+  return icons[type];
+};
+
 export function FilterBar({ selectedType, onTypeChange }: Props) {
   const { isDarkMode } = useTheme();
   
@@ -89,17 +105,25 @@ export function FilterBar({ selectedType, onTypeChange }: Props) {
           {types.map((type) => {
             const colors = getTagColors(type, isDarkMode);
             const isSelected = selectedType === type;
+            const gagIcon = getGagIcon(type);
 
             return (
               <button
                 key={type}
                 onClick={() => onTypeChange(type)}
-                className="px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap"
+                className="px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap flex items-center gap-2"
                 style={{
                   backgroundColor: isSelected ? colors.selectedBg : colors.bg,
                   color: isSelected ? colors.selectedText : colors.text
                 }}
               >
+                {gagIcon && (
+                  <ImageWithFallback
+                    src={gagIcon}
+                    alt=""
+                    className="w-5 h-5 object-contain"
+                  />
+                )}
                 {type === 'all' 
                   ? 'All' 
                   : type.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
